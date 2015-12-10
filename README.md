@@ -22,6 +22,7 @@ Proxy verwenden:   nein
 
 ```
 #insert usb umts stick
+#thx to https://www.raspberrypi.org/forums/viewtopic.php?t=38392&p=317787
 sudo su
 apt-get update
 apt-get upgrade
