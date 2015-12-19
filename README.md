@@ -18,8 +18,28 @@ IP-Header Komprimierung:  nein
 Proxy verwenden:   nein
 ```
 
-#on rpi
+Copy Rasbian Image on SD Card
 
+```
+#copy image to raspberry sd card
+#sudo dd bs=4M if=2015-11-21-raspbian-jessie-lite.img  of=/dev/sdb
+```
+
+Default network configuration for eth0
+```
+/etc/dhcpcd.conf
+# define static profile
+profile static_eth0
+static ip_address=192.168.1.23/24
+static routers=192.168.1.1
+static domain_name_servers=192.168.1.1
+
+# fallback to static profile on eth0
+interface eth0
+fallback static_eth0
+```
+
+Configure umts stick on raspberry
 ```
 #insert usb umts stick
 #thx to https://www.raspberrypi.org/forums/viewtopic.php?t=38392&p=317787
@@ -31,6 +51,7 @@ echo 'SUBSYSTEMS=="usb", ATTRS{modalias}=="usb:v12D1p1F01*", SYMLINK+="hwcdrom",
 reboot
 ```
 
+Begin installing cumulocity app
 ```
 DEVICECREDENTIALSPW="YourCumulocityDeviceCredentialsApiPw"
 
