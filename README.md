@@ -71,7 +71,7 @@ sudo apt-get install autossh
 
 ```
 sudo apt-get install git
-sudo apt-get install python3
+sudo apt-get install python
 ```
 
 ```
@@ -87,14 +87,24 @@ echo "deviceCredentialsPassword = $DEVICECREDENTIALSPW" >> cumulocity.cfg
 ```
 
 ```
+sudo apt-get install -yy python-pip
+sudo pip install --upgrade pip
+
+```
+
+```
 #supervise is in pacakge daemontool
-sudo apt-get -y install daemontools daemontools-run authbind
+sudo apt-get -y install daemontools daemontools-run
+
 
 #add supervise folder to supervise
 sudo update-service --add /home/pi/cumulocity-python-device-client/supervise/ cumulocityclient
 
 #start supervise
 sudo svc -u /home/pi/cumulocity-python-device-client/supervise/
+
+#checkout log files
+tail -f /tmp/cumulocity-log/current
 ```
 
 
