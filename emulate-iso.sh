@@ -9,15 +9,26 @@ set -u
 set -x
 
 
+
+if [ "$#" -ne 1 ]; then
+  echo "please specify which directory should be mapped to /install"
+  echo ""
+  echo "$0 ./map-this-dir"
+  exit 1
+fi
+
 IMAGE_URL="https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2015-11-24/2015-11-21-raspbian-jessie-lite.zip"
 IMAGE_DOWNLOAD_NAME="raspbian-image-lite.zip"
 
 IMAGE_NAME=""
 
-MOUNT_POINT_ROOT="/media"
+#mount point of root partition of image
+#no need to mount boot partition
+MOUNT_POINT_ROOT="/media/rpi_root"
 
 #resource dir will be mapped to /install dir on emulated device
-RESOURCE_DIR="~/"
+#get absolute path of argument $1
+RESOURCE_DIR=`readlink -f $1`
 
 is_root()
 {
@@ -43,6 +54,11 @@ download()
   unzip "$IMAGE_DOWNLOAD_NAME"
 }
 
+getBLOCK_START()
+{
+  BLOCK_START=`fdisk -l "$IMAGE_NAME" | grep "Linux" | awk '{print $2}'`
+}
+
 domount()
 {
   echo "mount image"
@@ -52,7 +68,7 @@ domount()
 
   mkdir -p "$MOUNT_POINT_ROOT"
 
-	mount -o offset=$(( 512 * 122880 )),loop "$LOOP_DEV" "$MOUNT_POINT_ROOT"
+	mount -o offset=$(( 512 * $BLOCK_START )),loop "$LOOP_DEV" "$MOUNT_POINT_ROOT"
 
   echo "image mounted on $MOUNT_POINT_ROOT"
 }
@@ -114,6 +130,8 @@ fi
 
 #check root
 is_root
+
+getBLOCK_START
 
 #mount
 domount
