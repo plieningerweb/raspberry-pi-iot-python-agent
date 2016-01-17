@@ -25,27 +25,7 @@ apt-get upgrade -yy
 #install huawei e303 support
 ./raspberry-huawei-e303.sh
 
-
 #install application
-APP_ROOT="/home/pi/app-pv"
+./raspberry-app.sh
 
-apt-get -y install git python-pip
-pip install --upgrade pip
-
-cd "$APP_ROOT"
-git checkout https://github.com/plieningerweb/cumulocity-python-device-client.git "$APP_ROOT"
-
-#use new config file
-cp /install/app.cfg "$APP_ROOT"
-
-#use new app file
-cp /install/app.py "$APP_ROOT"
-
-#add dependencies
-pip install kacors485
-
-#enable supervise
-cd $"APP_ROOT"
-./setup-supervise.sh
-
-echo "app installation finished"
+echo "installation of raspberry finished"

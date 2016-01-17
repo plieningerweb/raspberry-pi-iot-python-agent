@@ -50,14 +50,16 @@ if hash dphys-swapfile 2>/dev/null; then
 fi
 
 #noatime is already set in /etc/fstab
-$ECHO1 "link /tmp and /var/log to ram"
+echo "link /tmp and /var/log to ram"
 
 echo "backup old fstab file"
 cp /etc/fstab "/etc/fstab.backup-$TIMESTAMP"
 
 echo "install new fstab file"
-echo "$FSTAB_CONFIG" > /etc/fstab
+echo "$FSTABNEW" > /etc/fstab
 
 #link /var/tmp to /tmp, so we need only one mount point
 rm -rf /var/tmp
 ln -s /tmp /var/tmp
+
+echo "raspberry lifetime installation finished"
