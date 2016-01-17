@@ -12,7 +12,7 @@ echo "install app"
 apt-get -y install git python-pip
 pip install --upgrade pip
 
-git checkout https://github.com/plieningerweb/cumulocity-python-device-client.git "$APP_ROOT"
+git clone https://github.com/plieningerweb/cumulocity-python-device-client.git "$APP_ROOT"
 
 cd "$APP_ROOT"
 
@@ -26,7 +26,7 @@ cp /install/app.py "$APP_ROOT"
 pip install kacors485
 
 #enable supervise
-cd $"APP_ROOT"
+cd "$APP_ROOT"
 ./setup-supervise.sh
 
 echo "app installation finished"
