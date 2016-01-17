@@ -17,10 +17,14 @@ git clone https://github.com/plieningerweb/cumulocity-python-device-client.git "
 cd "$APP_ROOT"
 
 #use new config file
-cp /install/app.cfg "$APP_ROOT"
+cp /install/app/app.cfg "$APP_ROOT"
 
 #use new app file
-cp /install/app.py "$APP_ROOT"
+cp /install/app/app-pv.py "$APP_ROOT"
+
+#use new run file for app-pv
+cp /install/app/supervise/run "$APP_ROOT/supervise"
+
 
 #add dependencies
 pip install kacors485

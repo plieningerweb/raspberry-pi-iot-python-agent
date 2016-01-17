@@ -2,7 +2,23 @@
 Raspbery Pi IOT Python Agent Installation
 
 
-#on laptop
+## Troubeshooting
+
+### Wrong default gateway
+
+If default gateway is ethernet 0 (cable) and not eth1 (umts stick), then we get no internet connection.
+
+run on rpi to fix:
+```
+sudo route del default
+sudo route add default 192.168.8.1
+```
+
+## Sent meausrements but not displayed
+
+Maybe the timestamp of the sent measurements is wrong or very old. Check to update time using `raspberry-update-time.sh`.
+
+# on laptop
 
 check gsm stick and change config to use correct apn
 
@@ -55,10 +71,10 @@ Begin installing cumulocity app
 ```
 DEVICECREDENTIALSPW="YourCumulocityDeviceCredentialsApiPw"
 
-sudo apt-get install vnstat 
+sudo apt-get install vnstat
 #todo: chagne itnerface name
 sudo vnstat -u -i eth1
-sudo service vnstat start 
+sudo service vnstat start
 #fix: vnstat was not updating
 sudo chown -R vnstat:vnstat /var/lib/vnstat
 
@@ -106,6 +122,3 @@ sudo svc -u /home/pi/cumulocity-python-device-client/supervise/
 #checkout log files
 tail -f /tmp/cumulocity-log/current
 ```
-
-
-
