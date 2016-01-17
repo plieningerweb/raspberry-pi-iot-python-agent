@@ -105,7 +105,8 @@ qemu_run()
   echo "start bash on image"
   echo "/install folder will contain resource directory"
 
-  proot -q qemu-arm -r "$MOUNT_POINT_ROOT" -b "$RESOURCE_DIR:/install"
+  #always return exit code 0, even when last command in qmeu failed
+  proot -q qemu-arm -r "$MOUNT_POINT_ROOT" -b "$RESOURCE_DIR:/install" || true
 }
 
 
@@ -144,4 +145,4 @@ dounmount
 
 echo "changes were stored in image"
 echo "now you can e.g. write the image to a sd card"
-echo "sudo dd bs=4M if=image.img  of=/dev/sdz"
+echo "sudo dd bs=4M if=$IMAGE_NAME  of=/dev/sdz"
