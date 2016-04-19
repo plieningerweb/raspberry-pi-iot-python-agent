@@ -11,7 +11,7 @@ If default gateway is ethernet 0 (cable) and not eth1 (umts stick), then we get 
 run on rpi to fix:
 ```
 sudo route del default
-sudo route add default 192.168.8.1
+sudo ip route add default via 192.168.8.1
 ```
 
 ## Sent meausrements but not displayed
